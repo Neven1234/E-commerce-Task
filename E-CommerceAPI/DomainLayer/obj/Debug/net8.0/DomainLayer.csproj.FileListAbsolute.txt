@@ -1,0 +1,12 @@
+D:\E-commerce-Task\E-CommerceAPI\DomainLayer\bin\Debug\net8.0\DomainLayer.deps.json
+D:\E-commerce-Task\E-CommerceAPI\DomainLayer\bin\Debug\net8.0\DomainLayer.dll
+D:\E-commerce-Task\E-CommerceAPI\DomainLayer\bin\Debug\net8.0\DomainLayer.pdb
+D:\E-commerce-Task\E-CommerceAPI\DomainLayer\obj\Debug\net8.0\DomainLayer.GeneratedMSBuildEditorConfig.editorconfig
+D:\E-commerce-Task\E-CommerceAPI\DomainLayer\obj\Debug\net8.0\DomainLayer.AssemblyInfoInputs.cache
+D:\E-commerce-Task\E-CommerceAPI\DomainLayer\obj\Debug\net8.0\DomainLayer.AssemblyInfo.cs
+D:\E-commerce-Task\E-CommerceAPI\DomainLayer\obj\Debug\net8.0\DomainLayer.csproj.CoreCompileInputs.cache
+D:\E-commerce-Task\E-CommerceAPI\DomainLayer\obj\Debug\net8.0\DomainLayer.sourcelink.json
+D:\E-commerce-Task\E-CommerceAPI\DomainLayer\obj\Debug\net8.0\DomainLayer.dll
+D:\E-commerce-Task\E-CommerceAPI\DomainLayer\obj\Debug\net8.0\refint\DomainLayer.dll
+D:\E-commerce-Task\E-CommerceAPI\DomainLayer\obj\Debug\net8.0\DomainLayer.pdb
+D:\E-commerce-Task\E-CommerceAPI\DomainLayer\obj\Debug\net8.0\ref\DomainLayer.dll
