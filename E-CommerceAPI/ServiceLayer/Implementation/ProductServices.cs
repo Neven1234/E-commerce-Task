@@ -20,6 +20,11 @@ namespace ServiceLayer.Implementation
         }
         public async Task<Product> Add(Product product)
         {
+            var psodocodeExist=await _repository.GetAsync(x=>x.ProductCode==product.ProductCode);
+            if(psodocodeExist!=null)
+            {
+                return null;
+            }
             var NewProduct = await _repository.Add(product);
             return NewProduct;
         }

@@ -52,13 +52,17 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Microsoft.EntityFrameworkCore.InMemory": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",
               "version": "[17.6.0, )"
             },
-            "NSubstitute": {
+            "Moq": {
               "target": "Package",
-              "version": "[5.1.0, )"
+              "version": "[4.20.70, )"
             },
             "coverlet.collector": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",

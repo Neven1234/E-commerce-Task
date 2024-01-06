@@ -1,7 +1,9 @@
 ﻿using DomainLayer.Models;
 using E_CommerceAPI.Controllers;
 using Microsoft.AspNetCore.Mvc;
-using NSubstitute;
+using Microsoft.EntityFrameworkCore;
+using RepositoryLayer;
+using ServiceLayer.Implementation;
 using ServiceLayer.Interface;
 using System;
 using System.Collections.Generic;
@@ -13,14 +15,71 @@ namespace ASPUnitTest
 {
     public class ProductTest
     {
-        private readonly ProductController _controller;
-        private readonly IProductService _productService;
-
-        public ProductTest(ProductController controller,IProductService productService)
+        
+       
+        [Fact]
+        public async void GetProductById_WithInValidId_ShouldReturnNull()
         {
-            this._controller = controller;
-            this._productService = productService;
+            //Arrange
+            DbContextOptionsBuilder<DbContext> optionsBuilder = new DbContextOptionsBuilder<DbContext>();
+            optionsBuilder.UseInMemoryDatabase("TestDb");
+            AppDbContext dbContext = new AppDbContext(optionsBuilder.Options);
+            Repository<Product, int> repository = new Repository<Product, int>(dbContext);
+            ProductServices productService = new  ProductServices(repository);
+
+            Product product = new Product
+            {
+                Id = 1,
+                Name = "Test",
+                MinimumQuantity = 1,
+                Image="dd",
+                Price = 1,
+                ProductCode = 1,    
+                Category="dd",
+                DiscountRate=1,
+            };
+            productService.Add(product);
+            var id = 0;
+
+            //Act
+            var result = await productService.GetBuyId(id);
+
+            //Assert
+            Assert.Null(result);
+
+
         }
-      
+        [Fact]
+        public async void GetProductById_WithValidId_ShouldReturnProduct()
+        {
+            //Arrange
+            DbContextOptionsBuilder<DbContext> optionsBuilder = new DbContextOptionsBuilder<DbContext>();
+            optionsBuilder.UseInMemoryDatabase("TestDb");
+            AppDbContext dbContext = new AppDbContext(optionsBuilder.Options);
+            Repository<Product, int> repository = new Repository<Product, int>(dbContext);
+            ProductServices productService = new ProductServices(repository);
+
+            Product product = new Product
+            {
+                Id = 1,
+                Name = "Test",
+                MinimumQuantity = 1,
+                Image = "dd",
+                Price = 1,
+                ProductCode = 1,
+                Category = "dd",
+                DiscountRate = 1,
+            };
+            productService.Add(product);
+           
+
+            //Act
+            var result = await productService.GetBuyId(product.Id);
+
+            //Assert
+            Assert.Equal("Test",result.Name);
+
+
+        }
     }
 }

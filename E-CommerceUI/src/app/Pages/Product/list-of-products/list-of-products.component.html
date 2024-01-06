@@ -1,0 +1,38 @@
+<div *ngIf="!isLogged">
+    <app-home ></app-home>
+</div>
+<div class="container" *ngIf="isLogged" >
+
+    <!-- Card deck -->
+    <div class="card-deck row"  >
+    
+      <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let product of products" >
+      <!-- Card -->
+      <div class="card"  style="width: 350px; height: 450px;" >
+    
+        <!--Card image-->
+        <div class="view overlay">
+          <img class="card-img-top" style="height: 250px;" src={{product.image}} alt="Card image cap">
+          <a href="#!">
+            <div class="mask rgba-white-slight"></div>
+          </a>
+        </div>
+    
+        <!--Card content-->
+        <div class="card-body">
+    
+         <!--Title-->
+         <h4 class="card-title">{{product.name}}</h4>
+         <!--Text-->
+         <p class="card-text">{{product.category}}</p>
+         <!--Title-->
+         <h4 class="card-title">{{product.price}} EG</h4>
+          <!--Text-->
+          <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+          <button type="button" class="btn btn-light-blue btn-md" (click)="View(product.id)">View</button>
+    
+        </div>
+      
+    </div>
+    <!-- Card deck -->
+</div>

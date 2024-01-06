@@ -156,4 +156,5 @@ D:\E-commerce-Task\E-CommerceAPI\ASPUnitTest\obj\Debug\net8.0\ASPUnitTest.pdb
 D:\E-commerce-Task\E-CommerceAPI\ASPUnitTest\obj\Debug\net8.0\ASPUnitTest.genruntimeconfig.cache
 D:\E-commerce-Task\E-CommerceAPI\ASPUnitTest\obj\Debug\net8.0\ref\ASPUnitTest.dll
 D:\E-commerce-Task\E-CommerceAPI\ASPUnitTest\bin\Debug\net8.0\Castle.Core.dll
-D:\E-commerce-Task\E-CommerceAPI\ASPUnitTest\bin\Debug\net8.0\NSubstitute.dll
+D:\E-commerce-Task\E-CommerceAPI\ASPUnitTest\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.InMemory.dll
+D:\E-commerce-Task\E-CommerceAPI\ASPUnitTest\bin\Debug\net8.0\Moq.dll

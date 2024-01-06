@@ -34,6 +34,10 @@ namespace E_CommerceAPI.Controllers
         public async Task<IActionResult> AddProduct(Product product)
         {
             var result = await _product.Add(product);
+            if(result==null)
+            {
+                return Ok("Product Code must be uniqe");
+            }
             return Ok("Product Added Successfully");
         }
         [HttpPut("UpdateAsync/{Id:int}")]

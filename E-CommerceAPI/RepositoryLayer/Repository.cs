@@ -50,7 +50,14 @@ namespace RepositoryLayer
         }
         public async Task<T> GetById(TId id)
         {
-            return await _dbContext.FindAsync<T>(id);
+            try
+            {
+                return await _dbContext.FindAsync<T>(id);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         public async Task Update(Action<T> updateExpression, TId id)

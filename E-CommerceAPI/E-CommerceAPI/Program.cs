@@ -1,12 +1,17 @@
 using DomainLayer.Models;
+using E_CommerceAPI.Helper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using RepositoryLayer;
 using ServiceLayer.Implementation;
 using ServiceLayer.Interface;
+using ServiceLayer.Options;
+using System.Net;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -52,6 +57,7 @@ builder.Services.AddDbContext<AppDbContext>(option =>
     option.UseSqlServer(builder.Configuration.GetConnectionString("connSting"));
 });
 
+builder.Services.Configure<JWTOptions>(builder.Configuration.GetSection("JWT"));
 
 builder.Services.AddScoped<IRepository<User, int>,  Repository<User, int>>();
 builder.Services.AddScoped<IRepository<Product, int>, Repository<Product, int>>();
@@ -91,6 +97,21 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+//ExceptionHandeler
+app.UseExceptionHandler(builder =>
+{
+    builder.Run(async context =>
+    {
+        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+        var error = context.Features.Get<IExceptionHandlerFeature>();
+        if (error != null)
+        {
+            context.Response.AddApplicationError(error.Error.Message);
+            await context.Response.WriteAsync(error.Error.Message);
+        }
+    });
+});
+
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
@@ -103,6 +124,8 @@ app.UseStaticFiles(new StaticFileOptions()
 app.UseAuthentication();
 
 app.UseAuthorization();
+
+app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
 app.MapControllers();
 

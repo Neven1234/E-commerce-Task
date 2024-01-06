@@ -13,7 +13,8 @@ export class MasterService {
     return this.http.get(url)
   }
   post(url:string,entity:any):Observable<any>{
-    return this.http.post(url,entity);
+    const options = {responseType: 'text' as 'json'};
+    return this.http.post(url,entity,options);
   }
   put(url:string,entity:any):Observable<any>{
     return this.http.put(url,entity)

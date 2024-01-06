@@ -1,13 +1,18 @@
-﻿using DomainLayer.Models;
+﻿using Azure;
+using DomainLayer.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using RepositoryLayer;
 using ServiceLayer.Interface;
+using ServiceLayer.Options;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,12 +21,12 @@ namespace ServiceLayer.Implementation
     public class UserServices : IUserService
     {
         private readonly IRepository<User, int> _repository;
-        private readonly IConfiguration _configuration;
+        private readonly JWTOptions _configuration;
 
-        public UserServices(IRepository<User, int> repository, IConfiguration configuration)
+        public UserServices(IRepository<User, int> repository, IOptions<JWTOptions> configuration)
         {
             this._repository = repository;
-            this._configuration = configuration;
+            this._configuration = configuration.Value;
         }
         public async Task<string> LoginAsync(string username, string password)
         {
@@ -42,8 +47,11 @@ namespace ServiceLayer.Implementation
             var jwtToken = getToken(authClaims);
             var token = new JwtSecurityTokenHandler().WriteToken(jwtToken);
             var expiration = DateTime.Now.AddDays(1);
+           
             return token;
         }
+
+       
 
         public async Task<User> Register(User user, string password)
         {
@@ -97,12 +105,11 @@ namespace ServiceLayer.Implementation
 
         private JwtSecurityToken getToken(List<Claim> authClims)
         {
-            var authSigninKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this._configuration["JWT:SecretKey"]));
+            var authSigninKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this._configuration.SecretKey));
             var token = new JwtSecurityToken(
-                issuer: this._configuration["JWT:ValidIssuer"],
-                audience: this._configuration["JWT:ValidAudience"],
+                issuer: this._configuration.ValidIssuer,
+                audience: this._configuration.ValidAudience,
                 expires: DateTime.Now.AddHours(3),
-
                 claims: authClims,
                 signingCredentials: new SigningCredentials(authSigninKey, SecurityAlgorithms.HmacSha256)
                 );
@@ -110,7 +117,8 @@ namespace ServiceLayer.Implementation
             return token;
 
         }
+       
+       
 
-        
     }
 }
