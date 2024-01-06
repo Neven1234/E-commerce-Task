@@ -8,7 +8,7 @@
     
       <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let product of products" >
       <!-- Card -->
-      <div class="card"  style="width: 350px; height: 450px;" >
+      <div class="card"  style="width: 350px; height: 550px;" >
     
         <!--Card image-->
         <div class="view overlay">
@@ -26,8 +26,14 @@
          <!--Text-->
          <p class="card-text">{{product.category}}</p>
          <!--Title-->
-         <h4 class="card-title">{{product.price}} EG</h4>
+         <h4 class="card-title"><s> {{product.price}}</s> EG</h4>
           <!--Text-->
+           <!--Title-->
+         <h4 class="card-title">{{product.discountRate}}%</h4>
+         <!--Text-->
+           <!--Title-->
+           <h4 class="card-title">{{product.priceAfterDiscount}}EG</h4>
+           <!--Text-->
           <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
           <button type="button" class="btn btn-light-blue btn-md" (click)="View(product.id)">View</button>
     

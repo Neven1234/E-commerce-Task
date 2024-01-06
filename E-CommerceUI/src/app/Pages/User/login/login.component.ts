@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit {
         console.log('to :'+resul)
         localStorage.setItem('token',resul)
         this.appComp.IsLogged=true
+        setTimeout( () => { window.location.reload() }, 500 );
         this.router.navigate([''])
       },
       error:(res)=>{

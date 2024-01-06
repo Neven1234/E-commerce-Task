@@ -6,5 +6,7 @@ export interface product{
     category:string,
     image:string,
     minimumQuantity:number,
-    discountRate:number
+    discountRate:number,
+    priceAfterDiscount:number
+    
 }

@@ -20,7 +20,8 @@ export class ViewProductComponent implements OnInit {
     price:0,
     discountRate:0,
     category:'',
-    id:0
+    id:0,
+    priceAfterDiscount:0
   }
   ngOnInit(): void {
     this.route.paramMap.subscribe({

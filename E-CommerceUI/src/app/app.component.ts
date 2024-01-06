@@ -25,6 +25,7 @@ export class AppComponent implements OnInit {
   Clicked:boolean=false
   public LogOut(){
     localStorage.clear();
+    window.location.reload()
     this.IsLogged=false;
 
   }

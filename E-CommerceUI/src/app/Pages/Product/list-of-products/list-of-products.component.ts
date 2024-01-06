@@ -12,6 +12,7 @@ export class ListOfProductsComponent implements OnInit {
 
   constructor(private productService:ProductService,private router:Router){}
   products:product[]=[];
+  priceAfterDiscount:number[]=[]
   isLogged:boolean=false
   ngOnInit(): void {
     if (typeof window !== 'undefined' && window.document)
@@ -23,6 +24,9 @@ export class ListOfProductsComponent implements OnInit {
         this.productService.GetProducts().subscribe({
           next:(products)=>{
             this.products=products
+            this.products.forEach(product => {
+              product.priceAfterDiscount=this.calculatePriceAfterDiscountRate(product)
+            });
             console.log('tm')
           },
           error:(error)=>{
@@ -41,6 +45,11 @@ export class ListOfProductsComponent implements OnInit {
   }
   View(id:number){
     this.router.navigate(['view/'+id])
+  }
+  calculatePriceAfterDiscountRate(product:product)
+  {
+    var price=product.price*(product.discountRate/100)
+    return price
   }
 
 }
